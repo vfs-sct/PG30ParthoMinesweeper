@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="page-content">
+            <!--This header would be only be viewed in game view. It should be hidden otherwise-->            
+            <header class="">
+                <h1>Minesweeper</h1>
+            </header>
+            <main>
+                <!--We will programmatically show/hide the main menu section. This would be by default shown.-->
+                <!--For assignment 2, we are hiding it though -->
+                <section class="main-menu hidden">
+                    <h1> Minesweeper </h1>
+                    <ul class="buttons">
+                        <li>
+                            <button class="menu-button">Beginner</button>
+                        </li>
+                        <li>
+                            <button class="menu-button">Intermediate</button>
+                        </li>
+                        <li>
+                            <button class="menu-button">Expert</button>
+                        </li>
+                    </ul>
+                </section>
+
+                <!--We will programmatically show/hide this game-view section. This would be by default hidden-->
+                <!--For assignment 2, we are showing it though and hide the main menu-->
+                <section class="game-view">
+                    <section class="game-menu">
+                        <ul class="game-board-menu">
+                            <li class="game-board-menu-panel">010</li>
+                            <!--It seems we could generate /draw emojis instead of using them as images-->
+                            <li><button class="game-board-menu-button">&#128512;</button></li>
+                            <li class="game-board-menu-panel">001</li>
+                            <li><button class="game-board-menu-button">Exit</button></li>
+                        </ul>
+                    </section>
+
+                    <!--This board is just for demo. In actual game we would generate it dynamically from JS-->
+                    <!--The following board represents the beginner board. This we would be able to configure and modify from the
+        javascript though-->
+                    <section class="game-board">
+                        <table>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><div class="board-button board-button-border">1</div></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><div class="board-button board-button-border">1</div></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><div class="board-button board-button-border"></div></td>
+                                <td><div class="board-button board-button-border">3</div></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><div class="board-button board-button-border"></div></td>
+                                <td><div class="board-button board-button-border"></div></td>
+                                <td><div class="board-button board-button-border"></div></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                                <td><button class="board-button"></button></td>
+                            </tr>
+
+
+                        </table>
+                    </section>
+
+                </section>
+
+            </main>
+
+            <!--Footer is common in all the screens-->
+            <footer>
+                Copyright &copy; 2026
+            </footer>
+        </div>    
+    </div>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>
