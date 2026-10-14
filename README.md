@@ -3,7 +3,7 @@
 This repository holds source code of my html assignment 2 - Minesweeper layout.
 
 ## How to run
-Assuming node-js and git is installed.
+Assuming `node-js` and `git` is installed.
 
 Steps to run this project as follows:
 * Clone this repository.
