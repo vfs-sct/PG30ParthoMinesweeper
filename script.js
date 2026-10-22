@@ -1,1 +1,3 @@
-console.log("JS file loaded correctly! Replace it with your content"); 
+import GameEngine from "./libraries/gameEngine.js"
+
+const game = new GameEngine('game-page');

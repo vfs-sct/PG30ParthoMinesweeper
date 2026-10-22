@@ -6,47 +6,49 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="page-content">
+        <div id="game-page" class="page-content">
             <!--This header would be only be viewed in game view. It should be hidden otherwise-->            
-            <header class="">
+            <header class="game-header hidden">
                 <h1>Minesweeper</h1>
             </header>
-            <main>
+            <main id="game-container">
                 <!--We will programmatically show/hide the main menu section. This would be by default shown.-->
                 <!--For assignment 2, we are hiding it though -->
-                <section class="main-menu hidden">
+                <!-- This would be visible in assignment 3-->
+                <section class="main-menu">
                     <h1> Minesweeper </h1>
                     <ul class="buttons">
                         <li>
-                            <button class="menu-button">Beginner</button>
+                            <button id="beginner" class="menu-button">Beginner</button>
                         </li>
                         <li>
-                            <button class="menu-button">Intermediate</button>
+                            <button id="intermediate" class="menu-button">Intermediate</button>
                         </li>
                         <li>
-                            <button class="menu-button">Expert</button>
+                            <button id="expert" class="menu-button">Expert</button>
                         </li>
                     </ul>
                 </section>
 
                 <!--We will programmatically show/hide this game-view section. This would be by default hidden-->
                 <!--For assignment 2, we are showing it though and hide the main menu-->
-                <section class="game-view">
+                <!-- This would be hidden in assignment 3 by default-->
+                <section class="game-view hidden">
                     <section class="game-menu">
                         <ul class="game-board-menu">
                             <li class="game-board-menu-panel">010</li>
                             <!--It seems we could generate /draw emojis instead of using them as images-->
                             <li><button class="game-board-menu-button">&#128512;</button></li>
                             <li class="game-board-menu-panel">001</li>
-                            <li><button class="game-board-menu-button">Exit</button></li>
+                            <li><button id="game-exit" class="game-board-menu-button">Exit</button></li>
                         </ul>
                     </section>
 
                     <!--This board is just for demo. In actual game we would generate it dynamically from JS-->
                     <!--The following board represents the beginner board. This we would be able to configure and modify from the
         javascript though-->
-                    <section class="game-board">
-                        <table>
+                    <section id="game-board-container" class="game-board">
+                        <!--<table>
                             <tr>
                                 <td><button class="board-button"></button></td>
                                 <td><button class="board-button"></button></td>
@@ -148,7 +150,7 @@
                             </tr>
 
 
-                        </table>
+                        </table>-->
                     </section>
 
                 </section>
