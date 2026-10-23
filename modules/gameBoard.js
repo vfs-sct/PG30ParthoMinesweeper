@@ -6,6 +6,7 @@ class GameBoard {
 		this.bombs = bombs;
 
 		this.createBoard();
+
 	}
 
 	createBoard() {
@@ -21,7 +22,28 @@ class GameBoard {
 		return board;
 	}
 
-	renderBoard(
+	renderBoard() {
+		const gameBoardContainer = document.getElementById("game-board-container");
+		gameBoardContainer.innerHTML = '';
+		const table = document.createElement("table");
+
+		for (let rIdx = 0; rIdx < this.rows; ++rIdx) {
+			const row = document.createElement("tr");
+			for (let cIdx = 0; cIdx < this.rows; ++cIdx) {
+				const cell = document.createElement("td");
+				const cellButton = document.createElement("button");
+				cellButton.classList.add("board-button");
+				cell.dataset.row = rIdx;
+				cell.dataset.col = cIdx;
+				cell.appendChild(cellButton);
+				row.appendChild(cell);
+			}
+			table.appendChild(row);
+		}
+		gameBoardContainer.appendChild(table);
+	}
+
+	
 }
 
 export default GameBoard;

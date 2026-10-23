@@ -30,10 +30,10 @@ class GameState {
         switch (currentState.screen)
         {
             case "menu":
-                this.gameScreen.renderScreen("menu");
+                this.gameScreen.renderScreen("menu", "");
                 break;
             case "game":
-                this.gameScreen.renderScreen("game");
+                this.gameScreen.renderScreen("game", currentState.difficulty);
                 break;
         }
 

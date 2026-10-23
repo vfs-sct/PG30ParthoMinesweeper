@@ -10,11 +10,13 @@ class UserInput {
         const intermediate = document.getElementById("intermediate");
         const expert = document.getElementById("expert");
         const gameExit = document.getElementById("game-exit");
+        const gameReset = document.getElementById("game-reset");
 
         beginner.addEventListener("click", this.handleMenuClick.bind(this));
         intermediate.addEventListener("click", this.handleMenuClick.bind(this));
         expert.addEventListener("click", this.handleMenuClick.bind(this));
         gameExit.addEventListener("click", this.handleMenuClick.bind(this));
+        gameReset.addEventListener("click", this.handleMenuClick.bind(this));
     }
 
     handleMenuClick(event) {
@@ -35,6 +37,15 @@ class UserInput {
 
             case "game-exit":
                 this.gameState.popState();
+                break;
+
+            case "game-reset":
+                
+                const currentState = this.gameState.getState();
+                this.gameState.popState();
+
+                // reset with existing state
+                this.gameState.pushState({ screen: currentState.screen, difficulty: currentState.difficulty });
                 break;
 
         }

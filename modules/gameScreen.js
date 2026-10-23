@@ -1,8 +1,11 @@
+import GameBoard from "./gameBoard.js";
+
 class GameScreen {
     constructor() {
+        this.gameBoard = null;
     }
 
-    renderScreen(screen)
+    renderScreen(screen, difficulty)
     {
         const header = document.getElementsByClassName("game-header")[0];
         const mainMenu = document.getElementsByClassName("main-menu")[0];
@@ -18,23 +21,29 @@ class GameScreen {
                 mainMenu.classList.add("hidden");
                 gameView.classList.remove("hidden");
 
-                //load board
+                switch (difficulty) {
+                    case "beginner":
+                        this.renderBoardScreen(9, 9, 10);                        
+                        break;
+                    case "intermediate":
+                        this.renderBoardScreen(16, 16, 40);
+                        break;
+                    case "expert":
+                        this.renderBoardScreen(30, 16, 99);
+                        break;
+                }
+
+                
+                
                 break;
         }
     }
 
-    loadBoard()
-    {
-        const gameBoardContainer = document.getElementById("game-board-container");
-        
+    renderBoardScreen(rows, cols, bombs) {
+        this.gameBoard = new GameBoard(rows, cols, bombs)
+        this.gameBoard.renderBoard();
     }
 
-    generateBoard() {
-
-    }
-
-    
-    
 }
 
 export default GameScreen;
