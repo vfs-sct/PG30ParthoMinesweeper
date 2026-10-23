@@ -63,12 +63,12 @@ class GameBoard {
 					// add cell with bomb and background as red
 					cellContent.classList.add("exploded");
 				}
-				else if (cell.adjacent > 0) { // this means the numbers adjacent to bomb, for e.g, 1,2,3,4,etc
+			} else if (cell.adjacent > 0) { // this means the numbers adjacent to bomb, for e.g, 1,2,3,4,etc
 					cellContent.textContent = cell.adjacent;
 					// we paint the exact color
 					cellContent.classList.add("num-" + cell.adjacent);
 				}
-			}
+			
 			return cellContent;
 		}
 
@@ -148,7 +148,7 @@ class GameBoard {
 		for (let rIdx = 0; rIdx < this.rows; ++rIdx) {
 			for (let cIdx = 0; cIdx < this.cols; ++cIdx) {
 				// We are simply adding up the neighbours of the bomb cell and adding them in the adjacent cell
-				this.board[bombRow][bombCol].adjacent = this.getNeighbours(bombRow, bombCol).filter(([neighbourRow, neighbourCol]) => this.board[neighbourRow][neighbourCol].mine).length
+				this.board[rIdx][cIdx].adjacent = this.getNeighbours(rIdx, cIdx).filter(([neighbourRow, neighbourCol]) => this.board[neighbourRow][neighbourCol].mine).length
 			}
 		}
 	}
@@ -157,11 +157,11 @@ class GameBoard {
 	floodFill(startRow, startCol) {
 		// We will do an iterative floodfill instead of recursive using stack; In other words we are doing DFS traversal
 
-		stack = [[startRow, startCol]];
+		const stack = [[startRow, startCol]];
 		while (stack.length > 0) {
 			// get the top of stack
 			const [row, col] = stack.pop();
-			const cell = this.board[row][coll];
+			const cell = this.board[row][col];
 
 			// Don't do anything and skip if cell is a mine, flagged or already revealed
 			if (cell.revealed || cell.flagged || cell.mine) {
@@ -181,10 +181,43 @@ class GameBoard {
 		}
 	}
 
+	// Flag all mines on victory
+	flagAllMines() {
+		for (let rIdx = 0; rIdx < this.rows; ++rIdx) {
+			for (let cIdx = 0; cIdx < this.cols; ++cIdx) {
+				const cell = this.board[rIdx][cIdx];
+				if (cell.mine && !cell.flagged) {
+					cell.flagged = true;
+				}
+			}
+		}
+		this.flagsPlaced = this.bombs;
+	}
+
+	toggleFlag(row, col) {
+		// if player already won or lost, don't do anything
+		if (this.status === "won" || this.status === "lost") {
+			return;
+		}
+
+		const cell = this.board[row][col];
+
+		// Don't do anything on revealed cell
+		if (cell.revealed) {
+			return;
+		}
+
+		// we simply add or subtract from flags placed if cell has been flagged or not
+		cell.flagged = !cell.flagged;
+		this.flagsPlaced += cell.flagged ? 1 : -1;
+
+		this.renderBoard();
+	}
+
 	// This will be called everytime the button is clicked in board cell
 	reveal(row, col) {
 
-		if (this.status == "won" || this.status == "lost") {
+		if (this.status === "won" || this.status === "lost") {
 			return;
 		}
 
@@ -196,7 +229,7 @@ class GameBoard {
 		}
 
 		// Player just starting the game
-		if (this.status == "ready") {
+		if (this.status === "ready") {
 
 			// place mines
 			this.placeMines(row, col);
@@ -250,13 +283,13 @@ class GameBoard {
 	formatCounter(num) {
 		if (num < 0) {
 			return "-" + String(Math.min(-num, 99)).padStart(2, "0");
-			return String(Math.min(num, 999)).padStart(3, "0")
 		}
-		
+		return String(Math.min(num, 999)).padStart(3, "0");
 	}
 
 	// HUD items like mine counter, timer and button face updated here
 	updateHud() {
+
 		let mineCounter = document.getElementById("mine-counter");
 		
 		mineCounter.textContent = this.formatCounter(this.bombs - this.flagsPlaced);
@@ -286,6 +319,7 @@ class GameBoard {
 			table.appendChild(row);
 		}
 		gameBoardContainer.appendChild(table);
+		this.updateHud();
 	}
 
 	

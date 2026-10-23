@@ -12,6 +12,10 @@ class GameScreen {
         const gameView = document.getElementsByClassName("game-view")[0];
         switch (screen) {
             case "menu":
+                // Although board won't be visible here but we still don't want to run the timer in background
+                if (this.gameBoard) {
+                    this.gameBoard.stopTimer();
+                }
                 header.classList.add("hidden");
                 mainMenu.classList.remove("hidden");
                 gameView.classList.add("hidden");

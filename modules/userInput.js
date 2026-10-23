@@ -20,6 +20,7 @@ class UserInput {
         gameReset.addEventListener("click", this.handleMenuClick.bind(this));
 
         gameBoard.addEventListener("click", this.handleClick.bind(this));
+        gameBoard.addEventListener("contextmenu", this.handleRightClick.bind(this));
     }
 
     handleMenuClick(event) {
@@ -54,14 +55,38 @@ class UserInput {
         }
     }
 
-    handleClick(event) {
+    // We are simply returning a hash of row and column
+    getCellFromEvent(event) {
         const cell = event.target.closest("td");
-        if (cell) {
-            const row = parseInt(cell.dataset.row);
-            const col = parseInt(cell.dataset.col);
-            alert("row" + row + " col" + col);
+        if (!cell) {
+            return null;
+        }
+        return {
+            row: parseInt(cell.dataset.row),
+            col: parseInt(cell.dataset.col)
+        };
+    }
+
+    // Get pos and reveal it on board
+    handleClick(event) {
+        const pos = this.getCellFromEvent(event)
+        if (!pos) {
+            return;
         }
 
+        const board = this.gameState.gameScreen.gameBoard;
+        board.reveal(pos.row, pos.col);
+    }
+
+    // Flag pos on board
+    handleRightClick(event) {
+        const pos = this.getCellFromEvent(event)
+        if (!pos) {
+            return;
+        }
+
+        const board = this.gameState.gameScreen.gameBoard;
+        board.toggleFlag(pos.row, pos.col);
     }
 
 
