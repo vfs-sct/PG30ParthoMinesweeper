@@ -153,9 +153,36 @@ class GameBoard {
 		}
 	}
 
+	// Referred algorithm from https://dev.to/codeguppy/flood-fill-recursion-or-no-recursion-3fop
+	floodFill(startRow, startCol) {
+		// We will do an iterative floodfill instead of recursive using stack; In other words we are doing DFS traversal
+
+		stack = [[startRow, startCol]];
+		while (stack.length > 0) {
+			// get the top of stack
+			const [row, col] = stack.pop();
+			const cell = this.board[row][coll];
+
+			// Don't do anything and skip if cell is a mine, flagged or already revealed
+			if (cell.revealed || cell.flagged || cell.mine) {
+				continue;
+			}
+
+			cell.revealed = true;
+			this.revealedCount++;
+
+			if (cell.adjacent == 0) {
+				// get neighbours and push to stack
+				const neighbours = this.getNeighbours(row, col);
+				for (let nIdx = 0; nIdx < neighbours.length; ++nIdx) {
+					stack.push(neighbours[nIdx]);
+				}
+			}
+		}
+	}
+
 	// This will be called everytime the button is clicked in board cell
-	reveal(row, col)
-	{
+	reveal(row, col) {
 
 		if (this.status == "won" || this.status == "lost") {
 			return;
@@ -164,8 +191,7 @@ class GameBoard {
 		const cell = this.board[row][col];
 
 		// If the cell has been revealed or has been flagged, don't do anything on click
-		if (cell.revealed || cell.flagged)
-		{
+		if (cell.revealed || cell.flagged) {
 			return;
 		}
 
@@ -181,6 +207,21 @@ class GameBoard {
 			// start the timer
 			this.startTimer();
 		}
+
+		if (cell.mine) {
+			cell.exploded = true;
+			this.status = "lost";
+			this.stopTimer();
+		} else {
+			this.floodFill(row, col);
+			if (this.revealedCount === (this.rows * this.cols - this.bombs)) {
+				this.status = "won";
+				this.stopTimer();
+				this.flagAllMines();
+			}
+		}
+
+		this.renderBoard();
 
 	}
 
