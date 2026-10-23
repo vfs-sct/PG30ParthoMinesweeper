@@ -11,12 +11,15 @@ class UserInput {
         const expert = document.getElementById("expert");
         const gameExit = document.getElementById("game-exit");
         const gameReset = document.getElementById("game-reset");
+        const gameBoard = document.getElementById("game-board-container");
 
         beginner.addEventListener("click", this.handleMenuClick.bind(this));
         intermediate.addEventListener("click", this.handleMenuClick.bind(this));
         expert.addEventListener("click", this.handleMenuClick.bind(this));
         gameExit.addEventListener("click", this.handleMenuClick.bind(this));
         gameReset.addEventListener("click", this.handleMenuClick.bind(this));
+
+        gameBoard.addEventListener("click", this.handleClick.bind(this));
     }
 
     handleMenuClick(event) {
@@ -50,6 +53,18 @@ class UserInput {
 
         }
     }
+
+    handleClick(event) {
+        const cell = event.target.closest("td");
+        if (cell) {
+            const row = parseInt(cell.dataset.row);
+            const col = parseInt(cell.dataset.col);
+            alert("row" + row + " col" + col);
+        }
+
+    }
+
+
 }
 
 export default UserInput;

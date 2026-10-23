@@ -29,7 +29,7 @@ class GameScreen {
                         this.renderBoardScreen(16, 16, 40);
                         break;
                     case "expert":
-                        this.renderBoardScreen(30, 16, 99);
+                        this.renderBoardScreen(16, 30, 99);
                         break;
                 }
 
@@ -40,6 +40,10 @@ class GameScreen {
     }
 
     renderBoardScreen(rows, cols, bombs) {
+        if (this.gameBoard) {
+            this.gameBoard.stopTimer();
+        }
+
         this.gameBoard = new GameBoard(rows, cols, bombs)
         this.gameBoard.renderBoard();
     }

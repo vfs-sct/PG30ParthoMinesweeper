@@ -37,6 +37,18 @@ main {
     border-collapse:collapse;
     border:solid;
 }
+
+    .game-board table {
+        border-collapse: collapse;
+    }
+
+    .game-board td {
+        padding: 0;
+    }
+
+.board-button {
+    user-select: none;
+}
 .game-board-menu {
     display: flex;
     flex-direction: column;
@@ -59,12 +71,12 @@ main {
 .board-button {
     width: 40px;
     height: 40px;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
     font-size: 20px;
-    justify-content:center;
-    
+    justify-content: center;
+    align-items: center;
 }
 
 .board-button-border {
@@ -95,4 +107,39 @@ main {
 footer {
     min-height: 50px;
 }
-.vs
+
+.exploded {
+    background-color: red;
+}
+
+.num-1 {
+    color: blue;
+}
+
+.num-2 {
+    color: green;
+}
+
+.num-3 {
+    color: red;
+}
+
+.num-4 {
+    color: darkblue;
+}
+
+.num-5 {
+    color: brown;
+}
+
+.num-6 {
+    color: teal;
+}
+
+.num-7 {
+    color: black;
+}
+
+.num-8 {
+    color: gray;
+}
